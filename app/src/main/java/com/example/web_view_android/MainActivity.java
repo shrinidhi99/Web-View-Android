@@ -2,6 +2,7 @@ package com.example.web_view_android;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import android.os.Bundle;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
@@ -20,6 +21,15 @@ public class MainActivity extends AppCompatActivity {
         webView.loadUrl("https://github.com/shrinidhi99");
         WebSettings webSettings = webView.getSettings();
         webSettings.setJavaScriptEnabled(true);
+        final SwipeRefreshLayout pullToRefresh = findViewById(R.id.pullToRefresh);
+        pullToRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+
+                startActivity(MainActivity.this.getIntent());
+                pullToRefresh.setRefreshing(false);
+            }
+        });
     }
 
     @Override
